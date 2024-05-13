@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadImage() {
+        // Инстанция Retrofit
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://random.dog/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -47,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DogResponse> call, Throwable t) {
-                // Обработка ошибки загрузки изображения
+                // Обработка неудачного запроса
+                Toast.makeText(MainActivity.this,"Ошибка!", Toast.LENGTH_SHORT);
             }
         });
     }
